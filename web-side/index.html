@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script
+      src="https://code.jquery.com/jquery-3.5.0.js"
+      integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <title>Notify</title>
+  </head>
+
+  <body>
+    <div id="notifys"></div>
+    <div id="texts"></div>
+    <div id="announces"></div>
+
+    <!-- Botão fixo de acesso ao menu de ajuda -->
+    <div class="help-button" id="help-button">
+      <div class="help-button-icon">
+        <i class="fas fa-question"></i>
+      </div>
+      <div class="help-button-key">=</div>
+      <div class="help-button-text">Ajuda</div>
+    </div>
+
+    <!-- Menu de Ajuda com Cards -->
+    <div class="help-menu" id="help-menu" style="display: none">
+      <!-- Tela Principal -->
+      <div class="screen main-screen" id="main-screen">
+        <div class="help-menu-header">
+          <h1>Menu de Ajuda - Santa City RP</h1>
+          <button class="help-menu-close" id="help-menu-close">Fechar</button>
+        </div>
+
+        <div class="cards-container">
+          <!-- Card de Comandos Básicos -->
+          <div class="help-card" data-screen="comandos-screen">
+            <div class="help-card-header">
+              <div class="help-card-icon">
+                <i class="fas fa-keyboard"></i>
+              </div>
+              <div class="help-card-title">Comandos Básicos</div>
+            </div>
+          </div>
+
+          <!-- Card de Veículos -->
+          <div class="help-card" data-screen="veiculos-screen">
+            <div class="help-card-header">
+              <div class="help-card-icon">
+                <i class="fas fa-car"></i>
+              </div>
+              <div class="help-card-title">Veículos</div>
+            </div>
+          </div>
+
+          <!-- Card de Profissões -->
+          <div class="help-card" data-screen="profissoes-screen">
+            <div class="help-card-header">
+              <div class="help-card-icon">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <div class="help-card-title">Profissões</div>
+            </div>
+          </div>
+
+          <!-- Card de Sistema de Multas -->
+          <div class="help-card" data-screen="multas-screen">
+            <div class="help-card-header">
+              <div class="help-card-icon">
+                <i class="fas fa-money-bill"></i>
+              </div>
+              <div class="help-card-title">Sistema de Multas</div>
+            </div>
+          </div>
+
+          <!-- Card de Regras do Servidor -->
+          <div class="help-card" data-screen="regras-screen">
+            <div class="help-card-header">
+              <div class="help-card-icon">
+                <i class="fas fa-gavel"></i>
+              </div>
+              <div class="help-card-title">Regras do Servidor</div>
+            </div>
+          </div>
+
+          <!-- Card de Outros -->
+          <div class="help-card" data-screen="outros-screen">
+            <div class="help-card-header">
+              <div class="help-card-icon">
+                <i class="fas fa-ellipsis-h"></i>
+              </div>
+              <div class="help-card-title">Outros</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="help-menu-footer">
+          Santa City RP - Pressione "=" para abrir/fechar este menu
+        </div>
+      </div>
+
+      <!-- Tela de Comandos Básicos -->
+      <div class="screen" id="comandos-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-keyboard"></i>
+            <span>Comandos Básicos</span>
+          </div>
+          <button class="back-button" data-target="main-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="detail-section">
+          <ul>
+            <li>
+              <span class="command-key">ALT</span> - Interagir com
+              objetos/pessoas
+            </li>
+            <li><span class="command-key">K</span> - Abrir celular</li>
+            <li><span class="command-key">T</span> - Abrir chat</li>
+            <li><span class="command-key">"</span> - Abrir inventário</li>
+            <li><span class="command-key">F6</span> - Cancelar animação</li>
+            <li><span class="command-key">F9</span> - Menu dinâmico</li>
+            <li><span class="command-key">F5</span> - Menu de ajuda</li>
+            <li><span class="command-key">/id</span> - Ver seu ID</li>
+            <li><span class="command-key">/me</span> - Mostrar ação</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tela de Veículos -->
+      <div class="screen" id="veiculos-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-car"></i>
+            <span>Veículos</span>
+          </div>
+          <button class="back-button" data-target="main-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="detail-section">
+          <h3>Controles</h3>
+          <ul>
+            <li><span class="command-key">F</span> - Entrar em veículos</li>
+            <li><span class="command-key">Z</span> - Ligar/desligar motor</li>
+            <li><span class="command-key">L</span> - Trancar/destrancar</li>
+            <li><span class="command-key">X</span> - Colocar cinto</li>
+            <li><span class="command-key">M</span> - Controle de janelas</li>
+          </ul>
+        </div>
+
+        <div class="detail-section">
+          <h3>Comandos de Veículos</h3>
+          <ul>
+            <li>
+              <span class="command-key">/veiculosapreendidos</span> - Ver
+              veículos apreendidos
+            </li>
+            <li>
+              <span class="command-key">/pagarmulta [veículo]</span> - Pagar
+              multa
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tela de Profissões -->
+      <div class="screen" id="profissoes-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-briefcase"></i>
+            <span>Profissões</span>
+          </div>
+          <button class="back-button" data-target="main-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="category-content">
+          <div class="subcard-container">
+            <!-- Profissões Legais -->
+            <div class="subcard" data-screen="profissoes-legais-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-balance-scale"></i>
+              </div>
+              <div class="subcard-title">Profissões Legais</div>
+            </div>
+
+            <!-- Profissões Ilegais -->
+            <div class="subcard" data-screen="profissoes-ilegais-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-mask"></i>
+              </div>
+              <div class="subcard-title">Profissões Ilegais</div>
+            </div>
+
+            <!-- Serviços Públicos -->
+            <div class="subcard" data-screen="servicos-publicos-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-building"></i>
+              </div>
+              <div class="subcard-title">Serviços Públicos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tela de Profissões Legais -->
+      <div class="screen" id="profissoes-legais-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-balance-scale"></i>
+            <span>Profissões Legais</span>
+          </div>
+          <button class="back-button" data-target="profissoes-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="breadcrumb">
+          <span>Profissões</span> <i class="fas fa-chevron-right"></i>
+          <span>Profissões Legais</span>
+        </div>
+
+        <div class="category-content">
+          <div class="subcard-container">
+            <!-- Mecânico -->
+            <div class="subcard" data-screen="mecanico-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-wrench"></i>
+              </div>
+              <div class="subcard-title">Mecânico</div>
+            </div>
+
+            <!-- Táxi -->
+            <div class="subcard" data-screen="taxi-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-taxi"></i>
+              </div>
+              <div class="subcard-title">Taxista</div>
+            </div>
+
+            <!-- Pescador -->
+            <div class="subcard" data-screen="pescador-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-fish"></i>
+              </div>
+              <div class="subcard-title">Pescador</div>
+            </div>
+
+            <!-- Minerador -->
+            <div class="subcard" data-screen="minerador-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-hard-hat"></i>
+              </div>
+              <div class="subcard-title">Minerador</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tela de Profissões Ilegais -->
+      <div class="screen" id="profissoes-ilegais-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-mask"></i>
+            <span>Profissões Ilegais</span>
+          </div>
+          <button class="back-button" data-target="profissoes-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="breadcrumb">
+          <span>Profissões</span> <i class="fas fa-chevron-right"></i>
+          <span>Profissões Ilegais</span>
+        </div>
+
+        <div class="category-content">
+          <div class="subcard-container">
+            <!-- Desmanche -->
+            <div class="subcard" data-screen="desmanche-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-tools"></i>
+              </div>
+              <div class="subcard-title">Desmanche</div>
+            </div>
+
+            <!-- Tráfico -->
+            <div class="subcard" data-screen="trafico-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-pills"></i>
+              </div>
+              <div class="subcard-title">Tráfico</div>
+            </div>
+
+            <!-- Roubo -->
+            <div class="subcard" data-screen="roubo-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-gem"></i>
+              </div>
+              <div class="subcard-title">Roubo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tela de Serviços Públicos -->
+      <div class="screen" id="servicos-publicos-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-building"></i>
+            <span>Serviços Públicos</span>
+          </div>
+          <button class="back-button" data-target="profissoes-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="breadcrumb">
+          <span>Profissões</span> <i class="fas fa-chevron-right"></i>
+          <span>Serviços Públicos</span>
+        </div>
+
+        <div class="category-content">
+          <div class="subcard-container">
+            <!-- Polícia -->
+            <div class="subcard" data-screen="policia-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="subcard-title">Polícia</div>
+            </div>
+
+            <!-- Médico -->
+            <div class="subcard" data-screen="medico-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-heartbeat"></i>
+              </div>
+              <div class="subcard-title">Médico</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TELAS DE DETALHES DAS PROFISSÕES ESPECÍFICAS -->
+
+      <!-- Tela do Mecânico -->
+      <div class="screen" id="mecanico-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-wrench"></i>
+            <span>Mecânico</span>
+          </div>
+          <button class="back-button" data-target="profissoes-legais-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="breadcrumb">
+          <span>Profissões</span> <i class="fas fa-chevron-right"></i>
+          <span>Profissões Legais</span> <i class="fas fa-chevron-right"></i>
+          <span>Mecânico</span>
+        </div>
+
+        <div class="detail-section">
+          <ul>
+            <li><b>Local:</b> Los Santos Customs</li>
+            <li><b>Função:</b> Reparar e customizar veículos</li>
+            <li><b>Comandos:</b></li>
+            <li>
+              <span class="command-key">/reparar</span> - Reparar veículo
+              próximo
+            </li>
+            <li>
+              <span class="command-key">/tuning</span> - Abrir menu de
+              customização
+            </li>
+            <li>
+              <span class="command-key">/anunciar [mensagem]</span> - Anunciar
+              serviços
+            </li>
+            <li><b>Recompensa:</b> $500-$2000 por serviço</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tela do Desmanche -->
+      <div class="screen" id="desmanche-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-tools"></i>
+            <span>Desmanche</span>
+          </div>
+          <button class="back-button" data-target="profissoes-ilegais-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="breadcrumb">
+          <span>Profissões</span> <i class="fas fa-chevron-right"></i>
+          <span>Profissões Ilegais</span> <i class="fas fa-chevron-right"></i>
+          <span>Desmanche</span>
+        </div>
+
+        <div class="detail-section">
+          <ul>
+            <li><b>Requisito:</b> Membro de facção ou permissão específica</li>
+            <li><b>Local:</b> Pontos de desmanche espalhados pela cidade</li>
+            <li><b>Processo:</b></li>
+            <li>1. Levar veículo até o ponto de desmanche</li>
+            <li>2. Iniciar desmanche e pegar ferramentas</li>
+            <li>3. Desmontar todas as peças do veículo</li>
+            <li>4. Anunciar o chassi para finalizar</li>
+            <li><b>Recompensa:</b> 10% do valor do veículo em dinheiro</li>
+            <li>
+              <b>Consequência:</b> O dono do veículo recebe multa de 20% e
+              veículo fica apreendido
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tela do Sistema de Multas -->
+      <div class="screen" id="multas-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-money-bill"></i>
+            <span>Sistema de Multas</span>
+          </div>
+          <button class="back-button" data-target="main-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="detail-section">
+          <ul>
+            <li>
+              Quando um veículo é desmanchado, o proprietário recebe uma multa
+              de 20% do valor
+            </li>
+            <li>O veículo fica apreendido até que a multa seja paga</li>
+            <li>
+              Infrações de trânsito podem resultar em multas aplicadas pela
+              polícia
+            </li>
+            <li>
+              Use <span class="command-key">/pagarmulta [veículo]</span> em
+              delegacias para pagar multas
+            </li>
+            <li>
+              Use <span class="command-key">/veiculosapreendidos</span> para ver
+              seus veículos apreendidos
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tela de Outros -->
+      <div class="screen" id="outros-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-ellipsis-h"></i>
+            <span>Outros</span>
+          </div>
+          <button class="back-button" data-target="main-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="detail-section">
+          <ul>
+            <li>
+              <span class="command-key">/diamantes</span> - Acessar loja de
+              diamantes
+            </li>
+            <li><span class="command-key">/lojavip</span> - Abrir loja VIP</li>
+            <li>
+              <span class="command-key">ALT + Mira</span> - Avaliar outro
+              jogador
+            </li>
+            <li>O BattlePass é renovado todo dia 01 do mês</li>
+            <li>Você ganha benefícios por estar online (BattlePass - F4)</li>
+            <li>O Pier é o ponto central da cidade para socialização</li>
+            <li>Salve suas roupas com F9 > Roupas > Guardar</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tela de Regras do Servidor -->
+      <div class="screen" id="regras-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-gavel"></i>
+            <span>Regras do Servidor</span>
+          </div>
+          <button class="back-button" data-target="main-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="category-content">
+          <div class="subcard-container">
+            <!-- Base do RP -->
+            <div class="subcard" data-screen="base-rp-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <div class="subcard-title">Base do RP</div>
+            </div>
+
+            <!-- Profissões -->
+            <div class="subcard" data-screen="regras-profissoes-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <div class="subcard-title">Profissões</div>
+            </div>
+
+            <!-- Regras Ações -->
+            <div class="subcard" data-screen="regras-acoes-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <div class="subcard-title">Roubo, Guerra e Sequestro</div>
+            </div>
+
+            <!-- ADM -->
+            <div class="subcard" data-screen="regras-adm-screen">
+              <div class="subcard-icon">
+                <i class="fas fa-user-shield"></i>
+              </div>
+              <div class="subcard-title">Administração</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tela de Base do RP -->
+      <div class="screen" id="base-rp-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-book"></i>
+            <span>Base do RP</span>
+          </div>
+          <button class="back-button" data-target="regras-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="breadcrumb">
+          <span>Regras</span> <i class="fas fa-chevron-right"></i> <span>Base do RP</span>
+        </div>
+
+        <div class="detail-section">
+          <h3>🔹 1. RP (Roleplay) acima de tudo</h3>
+          <p>Você deve sempre agir como se estivesse vivendo no mundo do personagem, evitando atitudes que quebrem a imersão ou lembrem que é um jogo.</p>
+        </div>
+
+        <div class="detail-section">
+          <h3>🔹 2. Proibido Metagaming</h3>
+          <p>Metagaming é usar informações obtidas fora do jogo (como lives, Discord, etc.) para beneficiar seu personagem. Isso quebra a lógica do RP.</p>
+        </div>
+
+        <div class="detail-section">
+          <h3>🔹 3. Proibido Powergaming</h3>
+          <p>Powergaming é forçar ações impossíveis ou abusar das mecânicas do jogo sem dar chance de reação ao outro jogador. Exemplo: "Matei ele com um soco e fugi".</p>
+        </div>
+
+        <div class="detail-section">
+          <h3>🔹 4. Proibido RDM (Random Deathmatch)</h3>
+          <p>RDM é matar alguém sem motivo ou contexto de roleplay. Todas as ações devem ter uma justificativa dentro da história.</p>
+        </div>
+
+        <div class="detail-section">
+          <h3>🔹 5. Proibido VDM (Vehicle Deathmatch)</h3>
+          <p>VDM é atropelar intencionalmente jogadores sem motivo de RP ou como forma de combate fora de contexto.</p>
+        </div>
+
+        <div class="detail-section">
+          <h3>🔹 6. Valor à vida</h3>
+          <p>Seu personagem deve valorizar a própria vida. Isso significa, por exemplo, não reagir a um assalto armado de forma absurda se for claramente ameaçador.</p>
+        </div>
+
+        <div class="detail-section">
+          <h3>🔹 7. Uso correto do /me e /do</h3>
+          <p>/me descreve ações do seu personagem. Ex: /me retira a carteira do bolso.</p>
+          <p>/do descreve o ambiente ou resultado de ações. Ex: /do A carteira está com documentos e R$500.</p>
+        </div>
+
+        <div class="detail-section">
+          <h3>🔹 8. Nada de comportamento tóxico ou ofensivo fora do RP</h3>
+          <p>Respeite os outros jogadores fora do personagem. Brigas e ofensas OOC (fora do personagem) são passíveis de punição.</p>
+        </div>
+      </div>
+
+    <!-- Tela de Regras para Profissões -->
+    <div class="screen" id="regras-profissoes-screen">
+      <div class="screen-header">
+        <div class="screen-title">
+          <i class="fas fa-user-tie"></i>
+          <span>Regras para Profissões</span>
+        </div>
+        <button class="back-button" data-target="regras-screen">
+          <i class="fas fa-arrow-left"></i> Voltar
+        </button>
+      </div>
+
+      <div class="breadcrumb">
+        <span>Regras</span> <i class="fas fa-chevron-right"></i> <span>Profissões</span>
+      </div>
+
+      <div class="category-content">
+        <div class="subcard-container">
+          <!-- Facções -->
+          <div class="subcard" data-screen="regras-faccoes-screen">
+            <div class="subcard-icon">
+              <i class="fas fa-skull"></i>
+            </div>
+            <div class="subcard-title">Facções Criminosas</div>
+          </div>
+          
+          <!-- Polícia -->
+          <div class="subcard" data-screen="regras-policia-screen">
+            <div class="subcard-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="subcard-title">Polícia</div>
+          </div>
+          
+          <!-- Mecânicos -->
+          <div class="subcard" data-screen="regras-mecanicos-screen">
+            <div class="subcard-icon">
+              <i class="fas fa-wrench"></i>
+            </div>
+            <div class="subcard-title">Mecânicos</div>
+          </div>
+          
+          <!-- Médicos -->
+          <div class="subcard" data-screen="regras-medicos-screen">
+            <div class="subcard-icon">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <div class="subcard-title">Médicos</div>
+          </div>
+          
+          <!-- Bombeiros/SAMU -->
+          <div class="subcard" data-screen="regras-bombeiros-screen">
+            <div class="subcard-icon">
+              <i class="fas fa-fire-extinguisher"></i>
+            </div>
+            <div class="subcard-title">Bombeiros/SAMU</div>
+          </div>
+          
+          <!-- Profissões Gerais -->
+          <div class="subcard" data-screen="regras-civis-screen">
+            <div class="subcard-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="subcard-title">Profissões Gerais</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tela de Regras para Facções Criminosas -->
+    <div class="screen" id="regras-faccoes-screen">
+      <div class="screen-header">
+        <div class="screen-title">
+          <i class="fas fa-skull"></i>
+          <span>Facções Criminosas</span>
+        </div>
+        <button class="back-button" data-target="regras-profissoes-screen">
+          <i class="fas fa-arrow-left"></i> Voltar
+        </button>
+      </div>
+
+      <div class="breadcrumb">
+        <span>Regras</span> <i class="fas fa-chevron-right"></i> 
+        <span>Profissões</span> <i class="fas fa-chevron-right"></i> 
+        <span>Facções Criminosas</span>
+      </div>
+
+      <div class="detail-section">
+        <h3>🔴 Facções (Gangs, Cartéis, Máfia) ☠️</h3>
+        
+        <ol>
+          <li><b>Organização e Hierarquia</b>
+            <p>Facções devem manter uma hierarquia interna e respeitá-la no RP.<br>
+            Toda ação deve ter um líder ou responsável.</p>
+          </li>
+          
+          <li><b>Atos Criminais com RP</b>
+            <p>Roubos, sequestros, vendas de drogas, guerras entre facções, etc., só podem ocorrer com RP bem desenvolvido.<br>
+            Tudo deve ter justificativa e contexto.</p>
+          </li>
+          
+          <li><b>Limite de Sequestros/Roubos</b>
+            <p>Existem limites diário/semanal para ações como sequestros ou assaltos a bancos/lojas.<br>
+            Pode ser necessário avisar a staff antes de ações grandes (ex: atentados, assalto a banco).</p>
+          </li>
+          
+          <li><b>Proibido uso excessivo de armamento pesado</b>
+            <p>RPGs, explosivos e armas automáticas costumam ser restritos ou só permitidos com permissão da staff.</p>
+          </li>
+          
+          <li><b>Combate entre facções</b>
+            <p>Deve haver motivo justificado no RP (provocação, dívida, traição).<br>
+            Evite guerras sem narrativa ou puramente por PvP.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Tela de Regras para Polícia -->
+    <div class="screen" id="regras-policia-screen">
+      <div class="screen-header">
+        <div class="screen-title">
+          <i class="fas fa-shield-alt"></i>
+          <span>Polícia</span>
+        </div>
+        <button class="back-button" data-target="regras-profissoes-screen">
+          <i class="fas fa-arrow-left"></i> Voltar
+        </button>
+      </div>
+
+      <div class="breadcrumb">
+        <span>Regras</span> <i class="fas fa-chevron-right"></i> 
+        <span>Profissões</span> <i class="fas fa-chevron-right"></i> 
+        <span>Polícia</span>
+      </div>
+
+      <div class="detail-section">
+        <h3>🔵 Polícia (Polícia Militar, Civil, Federal) ⚖️</h3>
+        
+        <ol>
+          <li><b>Abordagem e Escalada</b>
+            <p>Toda ação policial deve seguir uma escalada de força (diálogo → tática → contenção → confronto).<br>
+            Não atire sem antes tentar resolver verbalmente, exceto em ameaças graves.</p>
+          </li>
+          
+          <li><b>Uso Justificado de Armas</b>
+            <p>Armas só devem ser sacadas/usadas em situações compatíveis com o protocolo (ex: tiroteios, ameaças armadas).<br>
+            Nada de sair com fuzil sem motivo ou patrulhar com armamento desnecessário.</p>
+          </li>
+          
+          <li><b>Cumprimento da Lei com RP</b>
+            <p>Prisões, revistas e investigações precisam ter base legal e roleplay consistente.<br>
+            Evite abusos de poder e RDM sob pretexto de "autoridade".</p>
+          </li>
+          
+          <li><b>Comunicação por rádio</b>
+            <p>Use linguagem padrão e clara. Nada de termos fora do RP (OOC).<br>
+            Uso de /me e /do em ações como revista, algemado, etc., é obrigatório.</p>
+          </li>
+          
+          <li><b>Proporcionalidade</b>
+            <p>Número de policiais em ações grandes (ex: invasão, operação) deve ser proporcional ao número de criminosos.</p>
+          </li>
+          
+          <li><b>Sem mistura com atividades ilegais</b>
+            <p>A profissão de policial não pode ser usada como disfarce para crimes. Se você escolheu seguir esta profissão, você trabalha para manter a segurança da cidade.<br>
+            Se seu personagem quiser seguir vida criminosa, deve deixar o cargo oficialmente.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Tela de Regras para Mecânicos -->
+    <div class="screen" id="regras-mecanicos-screen">
+      <div class="screen-header">
+        <div class="screen-title">
+          <i class="fas fa-wrench"></i>
+          <span>Mecânicos</span>
+        </div>
+        <button class="back-button" data-target="regras-profissoes-screen">
+          <i class="fas fa-arrow-left"></i> Voltar
+        </button>
+      </div>
+
+      <div class="breadcrumb">
+        <span>Regras</span> <i class="fas fa-chevron-right"></i> 
+        <span>Profissões</span> <i class="fas fa-chevron-right"></i> 
+        <span>Mecânicos</span>
+      </div>
+
+      <div class="detail-section">
+        <h3>🟣 Mecânicos (Oficina / Socorro Veicular) 🔧</h3>
+        
+        <ol>
+          <li><b>Atendimento com Roleplay</b>
+            <p>Todo conserto, modificação ou socorro deve ser feito com uso adequado de /me e /do, interpretando cada ação com coerência.<br>
+            Exemplo: /me conecta o scanner e identifica falha no sistema de ignição.<br>
+            Evite consertos automáticos e sem interpretação — o foco é a experiência de RP.</p>
+          </li>
+          
+          <li><b>Uniforme e Veículo Oficial</b>
+            <p>O mecânico deve estar uniformizado e utilizar veículos da oficina sempre que estiver de plantão ou atendendo chamados.<br>
+            Uso de carro pessoal só é permitido fora de serviço.</p>
+          </li>
+          
+          <li><b>Postura Profissional</b>
+            <p>Mantenha uma conduta respeitosa e coerente com a profissão durante atendimentos.<br>
+            Lembre-se: o mecânico é um prestador de serviço, não deve responder com agressividade ou desrespeito a clientes ou autoridades.</p>
+          </li>
+          
+          <li><b>Socorro e Guincho</b>
+            <p>Só realize guinchamentos com:<br>
+            - Autorização do dono do veículo ou<br>
+            - Situação justificada por RP (ex: apreensão, carro abandonado).<br>
+            Em áreas de crime ou perseguição, aguarde liberação policial antes de agir.</p>
+          </li>
+          
+          <li><b>Modificações e Tuning</b>
+            <p>Upgrades devem respeitar:<br>
+            - Limites técnicos do servidor<br>
+            - Regras internas da oficina<br>
+            Nada de instalar motor nível 5 ou blindagem total sem justificativa de RP ou sem cobrança justa.</p>
+          </li>
+          
+          <li><b>Neutralidade Profissional</b>
+            <p>O mecânico é um civil neutro, não deve se envolver em:<br>
+            - Tiroteios<br>
+            - Fugir com bandidos<br>
+            - Ajudar criminosos durante ações ilegais<br>
+            Socorros em meio a conflitos armados devem ser evitados.</p>
+          </li>
+          
+          <li><b>Sem mistura com atividades ilegais</b>
+            <p>A profissão de mecânico não pode ser usada como disfarce para crimes.<br>
+            Se seu personagem quiser seguir vida criminosa, deve deixar o cargo oficialmente.</p>
+          </li>
+          
+          <li><b>Organização e Hierarquia</b>
+            <p>Siga as orientações da liderança da oficina (gerente, mestre, supervisor).<br>
+            Estoques, peças, agendamentos e plantões devem seguir os procedimentos definidos internamente.</p>
+          </li>
+          
+          <li><b>Sem abusos ou consertos em fuga</b>
+            <p>É estritamente proibido consertar veículos:<br>
+            - Durante tiroteios<br>
+            - No meio de perseguições<br>
+            - Enquanto o carro está sendo usado para fuga<br>
+            Isso configura Powergaming e será punido.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Tela de Regras para Médicos -->
+    <div class="screen" id="regras-medicos-screen">
+      <div class="screen-header">
+        <div class="screen-title">
+          <i class="fas fa-heartbeat"></i>
+          <span>Médicos</span>
+        </div>
+        <button class="back-button" data-target="regras-profissoes-screen">
+          <i class="fas fa-arrow-left"></i> Voltar
+        </button>
+      </div>
+
+      <div class="breadcrumb">
+        <span>Regras</span> <i class="fas fa-chevron-right"></i> 
+        <span>Profissões</span> <i class="fas fa-chevron-right"></i> 
+        <span>Médicos</span>
+      </div>
+
+      <div class="detail-section">
+        <h3>🟢 Médicos (SAMU / EMS / Corpo Médico) 🚑</h3>
+        
+        <ol>
+          <li><b>Neutralidade e Isenção</b>
+            <p>Médicos não podem se envolver em conflitos, brigas, tiroteios ou apoiar qualquer facção (polícia ou criminosos).<br>
+            Devem sempre manter postura neutra e profissional.</p>
+          </li>
+          
+          <li><b>Prioridade é salvar vidas</b>
+            <p>A missão principal é prestar socorro a feridos e atender chamadas médicas.<br>
+            Sempre priorize o atendimento de quem está em estado grave ou inconsciente.</p>
+          </li>
+          
+          <li><b>Uso correto de /me e /do</b>
+            <p>Todos os atendimentos devem ser feitos com RP detalhado, usando:<br>
+            /me avalia os sinais vitais.<br>
+            /do Ferimentos visíveis na região do tórax.<br>
+            /me aplica morfina e começa a sutura.<br>
+            Evite "reviver com um clique". Faça todo o atendimento antes.</p>
+          </li>
+          
+          <li><b>Só reanime quem pode ser reanimado</b>
+            <p>Ferimentos fatais (como tiro na cabeça) não devem ser reanimados — a morte deve ser respeitada.<br>
+            Sempre avalie com /do se o paciente tem chance de sobrevivência.</p>
+          </li>
+          
+          <li><b>Sem armamento</b>
+            <p>Médicos não podem portar armas, mesmo que tenham porte fora do personagem. O foco é salvar vidas, não se defender ou atacar.<br>
+            Se houver tiroteio, espere liberação da polícia para agir.</p>
+          </li>
+          
+          <li><b>Ambulância e uniforme obrigatórios</b>
+            <p>Atendimento só pode ser feito com ambulância oficial e uniforme médico visível.<br>
+            Nada de atendimento com carros particulares ou roupas comuns.</p>
+          </li>
+          
+          <li><b>RP hospitalar</b>
+            <p>No hospital, siga protocolos básicos:<br>
+            Internações, transferências, aplicação de soro, cirurgia RP, etc.<br>
+            Use leitos, áreas de triagem, UTI e demais espaços conforme o caso.</p>
+          </li>
+          
+          <li><b>Respeito à fila e tempo de atendimento</b>
+            <p>Siga a ordem de chegada ou prioridade médica.<br>
+            Não abandone pacientes no hospital sem justificativa.</p>
+          </li>
+          
+          <li><b>Comportamento exemplar</b>
+            <p>Médicos devem manter postura educada, calma e responsável — são referência de conduta no servidor.</p>
+          </li>
+          
+          <li><b>Sem mistura com atividades ilegais</b>
+            <p>A profissão de médico é para ajudar a população e não pode ser usada como disfarce para crimes.<br>
+            Se seu personagem quiser seguir vida criminosa, deve deixar o cargo oficialmente.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Tela de Regras para Bombeiros/SAMU -->
+    <div class="screen" id="regras-bombeiros-screen">
+      <div class="screen-header">
+        <div class="screen-title">
+          <i class="fas fa-fire-extinguisher"></i>
+          <span>Bombeiros/SAMU</span>
+        </div>
+        <button class="back-button" data-target="regras-profissoes-screen">
+          <i class="fas fa-arrow-left"></i> Voltar
+        </button>
+      </div>
+
+      <div class="breadcrumb">
+        <span>Regras</span> <i class="fas fa-chevron-right"></i> 
+        <span>Profissões</span> <i class="fas fa-chevron-right"></i> 
+        <span>Bombeiros/SAMU</span>
+      </div>
+
+      <div class="detail-section">
+        <h3>🟠 Bombeiros/SAMU (Serviços Médicos de Emergência) ⛑️</h3>
+        
+        <ol>
+          <li><b>Papel de suporte e neutralidade</b>
+            <p>Bombeiros/SAMU não se envolvem em conflitos armados nem tomam partido.<br>
+            Foco total em atendimento médico e resgate.</p>
+          </li>
+          
+          <li><b>Atendimento com RP</b>
+            <p>Use /me e /do em toda situação médica (avaliar ferimentos, aplicar medicação, realizar RCP, etc.).<br>
+            Nada de "reviver" com um clique — o processo deve ser bem interpretado.</p>
+          </li>
+          
+          <li><b>Protocolo de resgate</b>
+            <p>Ao chegar em um local de tiroteio, só entre após liberação da polícia.<br>
+            Sempre faça contato com vítimas e avalie segurança da cena.</p>
+          </li>
+          
+          <li><b>Sem equipamentos militares</b>
+            <p>Proibido usar armamento, coletes militares, ou veículos fora do padrão médico/bombeiro.</p>
+          </li>
+          
+          <li><b>Sem mistura com atividades ilegais</b>
+            <p>A profissão de bombeiro não pode ser usada como disfarce para crimes.<br>
+            Se seu personagem quiser seguir vida criminosa, deve deixar o cargo oficialmente.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Tela de Regras para Profissões Gerais -->
+    <div class="screen" id="regras-civis-screen">
+      <div class="screen-header">
+        <div class="screen-title">
+          <i class="fas fa-users"></i>
+          <span>Profissões Gerais</span>
+        </div>
+        <button class="back-button" data-target="regras-profissoes-screen">
+          <i class="fas fa-arrow-left"></i> Voltar
+        </button>
+      </div>
+
+      <div class="breadcrumb">
+        <span>Regras</span> <i class="fas fa-chevron-right"></i> 
+        <span>Profissões</span> <i class="fas fa-chevron-right"></i> 
+        <span>Profissões Gerais</span>
+      </div>
+
+      <div class="detail-section">
+        <h3>⚪ Profissões Gerais (Civis e Autônomos) 💼</h3>
+        
+        <ol>
+          <li><b>Respeite o papel da sua função</b>
+            <p>Cada profissão tem uma função no RP. Trabalhos como taxista, entregador, pescador, entre outros, devem ser feitos com coerência e interpretação adequada.<br>
+            Você está atuando como trabalhador, e não como combatente, criminoso ou justiceiro.</p>
+          </li>
+          
+          <li><b>RP mínimo obrigatório</b>
+            <p>Mesmo nas profissões mais simples, é necessário usar /me e /do sempre que houver interação com outros jogadores.<br>
+            Exemplo: um taxista pode usar /me destrava as portas e sorri., /do O veículo está limpo e cheiroso.</p>
+          </li>
+          
+          <li><b>Postura e respeito</b>
+            <p>Mantenha sempre uma postura educada e respeitosa com clientes, civis, autoridades ou outros trabalhadores.<br>
+            Você representa o "trabalhador comum" no servidor — comportamento tóxico ou abusivo quebra o RP.</p>
+          </li>
+          
+          <li><b>Sem armamento ou envolvimento em crimes</b>
+            <p>Profissões civis não devem portar armas ou se envolver em atividades ilegais durante o expediente.<br>
+            Se quiser mudar a trajetória do personagem para o crime, deve abandonar formalmente o cargo.</p>
+          </li>
+          
+          <li><b>Veículos e uniforme adequados</b>
+            <p>Utilize os veículos e trajes correspondentes à sua função.<br>
+            Taxistas usam carros licenciados.<br>
+            Entregadores usam mochilas e motos/van da empresa.<br>
+            Lixeiros, mineradores, etc., devem seguir o visual correspondente.</p>
+          </li>
+          
+          <li><b>Não use o trabalho como disfarce para crimes</b>
+            <p>Trabalhar como entregador, taxista ou outro civil não pode ser usado para espionar, seguir, transportar drogas ou armas, a menos que haja RP claro e aceito pela administração.</p>
+          </li>
+          
+          <li><b>Evite atrapalhar o RP de outros</b>
+            <p>Não bloqueie ruas com caminhões/lixeiras à toa.<br>
+            Não faça entregas ou coletas em áreas de ação policial ou criminal sem necessidade.<br>
+            Cumpra seu serviço de forma coerente, sem gerar caos ou confusão.</p>
+          </li>
+          
+          <li><b>Lucro e tempo devem ser equilibrados</b>
+            <p>Jogadores não devem abusar do sistema de trabalho apenas para farmar dinheiro rapidamente, ignorando o RP.<br>
+            Servidores sérios valorizam mais o RP do que o acúmulo de bens.</p>
+          </li>
+          
+          <li><b>Interação com outros players é bem-vinda</b>
+            <p>Profissões civis podem ser ótimas oportunidades de criar histórias:<br>
+            - Um taxista que conhece a cidade inteira.<br>
+            - Um entregador que encontra uma situação inusitada.<br>
+            - Um pescador que sofre uma tempestade.<br>
+            Aproveite para construir personagens únicos, mesmo nos trabalhos mais simples.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Tela de Regras para Ações -->
+    <div class="screen" id="regras-acoes-screen">
+      <div class="screen-header">
+        <div class="screen-title">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>Roubo, Guerra e Sequestro</span>
+        </div>
+        <button class="back-button" data-target="regras-screen">
+          <i class="fas fa-arrow-left"></i> Voltar
+        </button>
+      </div>
+
+      <div class="breadcrumb">
+        <span>Regras</span> <i class="fas fa-chevron-right"></i> 
+        <span>Roubo, Guerra e Sequestro</span>
+      </div>
+
+      <div class="detail-section">
+        <h3>🚨 Regras para Roubo, Guerra ou Sequestro</h3>
+        
+        <h4>1. Planejamento de Ação</h4>
+        <p><b>RP de planejamento é obrigatório.</b> Todos os eventos de roubo, guerra ou sequestro devem ser <b>previamente planejados</b> com outros membros da facção ou grupo envolvido.</p>
+        <ul>
+          <li>Use o <span class="command-key">/me</span> e <span class="command-key">/do</span> para criar contexto e comunicação entre os envolvidos.</li>
+          <li>Não é permitido um roubo ou sequestro "sem motivo" ou aleatório. Deve haver uma razão coerente para tal ação (ex.: dinheiro, vingança, disputa de território, etc.).</li>
+        </ul>
+        
+        <h4>2. Realismo e Limitação de Itens</h4>
+        <p>Não é permitido o <b>abuso de armas</b> em roubos ou sequestros. Isso inclui <b>usar armas de forma desproporcional</b> ou fazer uma troca exagerada de fogo sem justificativa clara.</p>
+        <ul>
+          <li>Roubos e sequestros devem ser feitos de forma realista, sem exageros no uso de <b>armas pesadas ou explosivos</b> em locais públicos.</li>
+          <li>É necessário <b>evitar DM (Deathmatch)</b> ou RDM (Random Deathmatch). O roubo ou sequestro deve ocorrer com um contexto claro, sem matar aleatoriamente.</li>
+        </ul>
+        
+        <h4>3. Respeito ao RP de Outros Jogadores</h4>
+        <p><b>Nunca interrompa o RP de outra facção ou jogador</b> sem justificativa válida.</p>
+        <ul>
+          <li>Roubos e sequestros não podem ser usados como desculpa para causar interrupções no RP de outros jogadores que não estão envolvidos diretamente.</li>
+          <li>Evite realizar ações de <b>roubo ou sequestro em locais movimentados</b> onde outros jogadores possam ser afetados sem participar ativamente.</li>
+        </ul>
+        
+        <h4>4. Participação de Todos os Envolvidos</h4>
+        <p>Todos os jogadores <b>envolvidos em um roubo ou sequestro</b> devem estar cientes do cenário e da motivação da ação.</p>
+        <ul>
+          <li><b>O sequestro deve ser RP válido</b>, com interação clara e constante entre sequestrador(es) e vítima.</li>
+          <li>Em casos de guerra ou disputa de território, <b>todos os membros da facção ou organização</b> devem estar informados sobre as regras de engajamento e a <b>não utilização de exploits ou comandos administrativos</b> para facilitar a vitória.</li>
+        </ul>
+        
+        <h4>5. Prazos e Tempo de Duração</h4>
+        <p>O <b>tempo de duração de um roubo ou sequestro</b> deve ser razoável e dentro do limite de RP:</p>
+        <ul>
+          <li><b>Roubos rápidos</b> (ex.: lojas ou bancos) devem ser feitos de forma concisa, com tempo limitado para evitar desgaste e RP prolongado sem necessidade.</li>
+          <li><b>Sequestros podem durar mais tempo</b> (para negociação, comunicação com facções ou resgates), mas devem ter um <b>fim claro</b> e respeitar a liberdade da vítima em algum momento do RP.</li>
+        </ul>
+        
+        <h4>6. Intervenção de Autoridades</h4>
+        <p>Quando a <b>polícia ou bombeiros</b> são chamados ou entram na cena, deve haver uma interação coerente e com RP:</p>
+        <ul>
+          <li>Em caso de <b>sequestro</b>, a comunicação e negociação com a polícia devem ser feitas com <b>autenticidade</b> e <b>realismo</b> (por exemplo, exigir resgates, pedir troca de reféns, ou comunicação via rádio).</li>
+          <li><b>Guerras</b> entre facções ou disputas territoriais podem ser mediadas, mas nunca devem ocorrer de forma a <b>destruir o RP de outras facções</b>.</li>
+        </ul>
+        
+        <h4>7. Regra de Zona Segura</h4>
+        <p><b>Não é permitido roubo ou sequestro em áreas de RP seguro</b> (ex.: hospitais, zonas de polícia, dentro de comércios com "RP de segurança").</p>
+        <ul>
+          <li>Isso inclui locais onde outras facções ou jogadores possam ser impedidos de participar ou interferir no evento de RP.</li>
+          <li>A exceção pode ser acordos prévios ou guerra entre facções, onde o local específico foi previamente marcado.</li>
+        </ul>
+        
+        <h4>8. Punições por Quebra de Regra</h4>
+        <p>Caso haja <b>violação das regras de roubo, sequestro ou guerra</b> (ex.: RDM, Powergaming, Meta-gaming), o jogador pode ser sujeito a punições severas, que incluem:</p>
+        <ul>
+          <li>Advertência</li>
+          <li>Banimento temporário ou permanente, dependendo da gravidade da infração.</li>
+          <li>Se a facção estiver envolvida, pode haver sanções para todos os membros.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Tela de Regras para ADM -->
+    <div class="screen" id="regras-adm-screen">
+      <div class="screen-header">
+        <div class="screen-title">
+          <i class="fas fa-user-shield"></i>
+          <span>Administração</span>
+        </div>
+        <button class="back-button" data-target="regras-screen">
+          <i class="fas fa-arrow-left"></i> Voltar
+        </button>
+      </div>
+
+      <div class="breadcrumb">
+        <span>Regras</span> <i class="fas fa-chevron-right"></i> 
+        <span>Administração</span>
+      </div>
+
+      <div class="detail-section">
+        <h3>🔐 Regras para Administradores / Staff</h3>
+        
+        <ol>
+          <li><b>Imparcialidade acima de tudo</b>
+            <p>Nunca tome decisões baseadas em amizade, rivalidade ou benefício pessoal.<br>
+            Toda ação deve ser baseada em provas, regras e bom senso, <b>nunca por favoritismo</b>.</p>
+          </li>
+          
+          <li><b>Separar ADM do personagem</b>
+            <p>Seu personagem <b>não pode se beneficiar da sua posição na staff</b>.<br>
+            Não use comandos de administração (noclip, spawn, TP, etc.) para favorecer sua própria gameplay.<br>
+            Se estiver jogando, atue como jogador comum; se estiver como staff, não interaja no RP.</p>
+          </li>
+          
+          <li><b>Uso responsável de comandos</b>
+            <p>Só use comandos administrativos quando:<br>
+            - Estiver em atendimento.<br>
+            - Corrigindo bugs.<br>
+            - Fazendo eventos autorizados.<br>
+            Qualquer uso indevido (spawn de itens, dinheiro, veículos) é <b>motivo para banimento da equipe</b>.</p>
+          </li>
+          
+          <li><b>Sigilo e ética</b>
+            <p>Informações internas, denúncias, logs ou dados sensíveis devem ser tratados com <b>total confidencialidade</b>.<br>
+            Divulgar conversas da staff ou expor jogadores sem necessidade é <b>estritamente proibido</b>.</p>
+          </li>
+          
+          <li><b>Atendimento com respeito</b>
+            <p>Sempre trate os jogadores com educação, mesmo que estejam exaltados.<br>
+            Seja firme, claro e objetivo, mas <b>nunca agressivo ou debochado</b>.<br>
+            O ADM deve ser exemplo de maturidade.</p>
+          </li>
+          
+          <li><b>Disponibilidade e presença</b>
+            <p>Estar na staff exige compromisso. Mesmo que voluntário, é esperado:<br>
+            - Comparecer em reuniões.<br>
+            - Ajudar nos atendimentos.<br>
+            - Responder chamados e dúvidas com frequência.</p>
+          </li>
+          
+          <li><b>Registrar ações importantes</b>
+            <p>Banimentos, punições graves ou advertências devem ser:<br>
+            - Justificados com prints, vídeos ou logs.<br>
+            - Registrados nos canais corretos da staff.<br>
+            Nunca puna "na emoção" ou sem contexto.</p>
+          </li>
+          
+          <li><b>Não interferir em RP ativo</b>
+            <p>ADM não deve aparecer em cenas de RP <b>sem necessidade ou sem estar em atendimento</b>.<br>
+            Se precisar intervir, use a tag ADM e interrompa a ação de forma clara e respeitosa.</p>
+          </li>
+          
+          <li><b>Eventos e comandos só com permissão</b>
+            <p>Eventos especiais, sorteios ou ações fora do padrão devem ter <b>aprovação prévia da administração superior</b>.<br>
+            Nada de "criar evento do nada" sem organização ou aviso.</p>
+          </li>
+          
+          <li><b>ADM também pode ser punido</b>
+            <p>Ser staff <b>não dá imunidade</b>. ADM que quebrar regras do servidor ou usar poder de forma indevida está sujeito a:<br>
+            - Advertência<br>
+            - Suspensão<br>
+            - Remoção imediata</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
