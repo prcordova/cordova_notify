@@ -126,19 +126,22 @@
         </div>
 
         <div class="detail-section">
+          <h3>Teclas de Atalho (Teclado)</h3>
           <ul>
-            <li>
-              <span class="command-key">ALT</span> - Interagir com
-              objetos/pessoas
-            </li>
-            <li><span class="command-key">K</span> - Abrir celular</li>
+            <li><span class="command-key">ALT</span> - Interagir com objetos/pessoas</li>
+            <li><span class="command-key">F5</span> - Entrar/sair de serviço</li>
+            <li><span class="command-key">F6</span> - Cancelar animações</li>
+            <li><span class="command-key">F7</span> - Cancelar missões</li>
+            <li><span class="command-key">F9</span> - Abrir menu interativo</li>
+            <li><span class="command-key">HOME</span> - Alterar a distância da fala</li>
+            <li><span class="command-key">Z</span> - Ligar/desligar motor do veículo</li>
+            <li><span class="command-key">L</span> - Trancar/destrancar o veículo</li>
+            <li><span class="command-key">M</span> - Empurrar o carro</li>
+            <li><span class="command-key">'</span> (aspas) - Abrir o inventário</li>
+            <li><span class="command-key">G</span> - Algemar</li>
+            <li><span class="command-key">H</span> - Carregar jogador</li>
             <li><span class="command-key">T</span> - Abrir chat</li>
-            <li><span class="command-key">"</span> - Abrir inventário</li>
-            <li><span class="command-key">F6</span> - Cancelar animação</li>
-            <li><span class="command-key">F9</span> - Menu dinâmico</li>
-            <li><span class="command-key">F5</span> - Menu de ajuda</li>
-            <li><span class="command-key">/id</span> - Ver seu ID</li>
-            <li><span class="command-key">/me</span> - Mostrar ação</li>
+            <li><span class="command-key">K</span> - Abrir celular</li>
           </ul>
         </div>
       </div>
@@ -156,27 +159,18 @@
         </div>
 
         <div class="detail-section">
-          <h3>Controles</h3>
-          <ul>
-            <li><span class="command-key">F</span> - Entrar em veículos</li>
-            <li><span class="command-key">Z</span> - Ligar/desligar motor</li>
-            <li><span class="command-key">L</span> - Trancar/destrancar</li>
-            <li><span class="command-key">X</span> - Colocar cinto</li>
-            <li><span class="command-key">M</span> - Controle de janelas</li>
-          </ul>
-        </div>
-
-        <div class="detail-section">
           <h3>Comandos de Veículos</h3>
           <ul>
-            <li>
-              <span class="command-key">/veiculosapreendidos</span> - Ver
-              veículos apreendidos
-            </li>
-            <li>
-              <span class="command-key">/pagarmulta [veículo]</span> - Pagar
-              multa
-            </li>
+            <li><span class="command-key">/dv</span> - Deleta o veículo ao lado</li>
+            <li><span class="command-key">/fix</span> - Repara o veículo</li>
+            <li><span class="command-key">/car nomeDoCarro</span> - Spawna veículo</li>
+            <li><span class="command-key">/addcar nomeDoCarro (ID)</span> - Adiciona veículo à garagem do player</li>
+            <li><span class="command-key">/remcar nomeDoCarro (ID)</span> - Remove veículo da garagem do player</li>
+            <li><span class="command-key">/tuning</span> - Tunar o carro no máximo</li>
+            <li><span class="command-key">/vehs</span> - Lista seus veículos</li>
+            <li><span class="command-key">/vehs nomeDoVeiculo ID</span> - Vender veículo para outro player</li>
+            <li><span class="command-key">/veiculosapreendidos</span> - Ver veículos apreendidos</li>
+            <li><span class="command-key">/pagarmulta [veículo]</span> - Pagar multa</li>
           </ul>
         </div>
       </div>
@@ -360,6 +354,90 @@
         </div>
       </div>
 
+      <!-- Tela da Polícia -->
+      <div class="screen" id="policia-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-shield-alt"></i>
+            <span>Polícia</span>
+          </div>
+          <button class="back-button" data-target="servicos-publicos-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="breadcrumb">
+          <span>Profissões</span> <i class="fas fa-chevron-right"></i>
+          <span>Serviços Públicos</span> <i class="fas fa-chevron-right"></i>
+          <span>Polícia</span>
+        </div>
+
+        <div class="detail-section">
+          <h3>Teclas e Comandos Policiais</h3>
+          <ul>
+            <li><b>Teclas:</b></li>
+            <li><span class="command-key">F5</span> - Entrar/sair de serviço</li>
+            <li><span class="command-key">G</span> - Algemar</li>
+            <li><span class="command-key">H</span> - Carregar jogador</li>
+            
+            <li><b>Comandos:</b></li>
+            <li><span class="command-key">/tablet</span> - Prender pelo tablet policial</li>
+            <li><span class="command-key">/revistar</span> - Revistar um civil</li>
+            <li><span class="command-key">/apreender</span> - Apreender itens</li>
+            <li><span class="command-key">/cv</span> - Colocar pessoa algemada no veículo</li>
+            <li><span class="command-key">/rv</span> - Remover pessoa do veículo</li>
+            <li><span class="command-key">/placa</span> - Ver placa do veículo mais próximo</li>
+            <li><span class="command-key">/multar</span> - Aplicar multa no ID</li>
+            <li><span class="command-key">/detido</span> - Levar veículo à detenção</li>
+            <li><span class="command-key">/rchapeu</span> - Retirar chapéu de alguém próximo</li>
+            <li><span class="command-key">/rmascara</span> - Retirar máscara de alguém próximo</li>
+            <li><span class="command-key">/rcapuz</span> - Retirar capuz de alguém próximo</li>
+            <li><span class="command-key">/e continencia</span> - Fazer continência</li>
+            <li><span class="command-key">/policia</span> - Falar como Policial</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tela do Médico -->
+      <div class="screen" id="medico-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <i class="fas fa-heartbeat"></i>
+            <span>Médico</span>
+          </div>
+          <button class="back-button" data-target="servicos-publicos-screen">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+
+        <div class="breadcrumb">
+          <span>Profissões</span> <i class="fas fa-chevron-right"></i>
+          <span>Serviços Públicos</span> <i class="fas fa-chevron-right"></i>
+          <span>Médico</span>
+        </div>
+
+        <div class="detail-section">
+          <h3>SAMU (Serviço Médico)</h3>
+          <ul>
+            <li><b>Teclas:</b></li>
+            <li><span class="command-key">F5</span> - Entrar/sair de serviço</li>
+            <li><span class="command-key">H</span> - Carregar paciente</li>
+            
+            <li><b>Comandos:</b></li>
+            <li><span class="command-key">/fichahp</span> - Abrir painel de atendimento</li>
+            <li><span class="command-key">/re</span> - Reanimar paciente em coma</li>
+            <li><span class="command-key">/tratamento</span> - Curar paciente</li>
+            <li><span class="command-key">/e cuidar</span> - Animação de cuidado</li>
+            <li><span class="command-key">/e prancheta</span> - Animação de anotações</li>
+            <li><span class="command-key">/e anotar</span> - Animação com caderneta</li>
+            <li><span class="command-key">/ferido</span> - Modo andar ferido</li>
+            <li><span class="command-key">/cv</span> - Colocar paciente na ambulância</li>
+            <li><span class="command-key">/rv</span> - Retirar paciente da ambulância</li>
+            <li><span class="command-key">/medico</span> - Falar como Médico</li>
+          </ul>
+        </div>
+      </div>
+
       <!-- TELAS DE DETALHES DAS PROFISSÕES ESPECÍFICAS -->
 
       <!-- Tela do Mecânico -->
@@ -486,20 +564,27 @@
         </div>
 
         <div class="detail-section">
+          <h3>Comandos de Chat</h3>
           <ul>
-            <li>
-              <span class="command-key">/diamantes</span> - Acessar loja de
-              diamantes
-            </li>
-            <li><span class="command-key">/lojavip</span> - Abrir loja VIP</li>
-            <li>
-              <span class="command-key">ALT + Mira</span> - Avaliar outro
-              jogador
-            </li>
-            <li>O BattlePass é renovado todo dia 01 do mês</li>
-            <li>Você ganha benefícios por estar online (BattlePass - F4)</li>
-            <li>O Pier é o ponto central da cidade para socialização</li>
-            <li>Salve suas roupas com F9 > Roupas > Guardar</li>
+            <li><span class="command-key">/yt</span> - Falar como YouTuber</li>
+            <li><span class="command-key">/s</span> - Falar no chat STAFF</li>
+            <li><span class="command-key">/twitch</span> - Falar como Streamer</li>
+            <li><span class="command-key">/admin</span> - Falar como ADM</li>
+            <li><span class="command-key">/twitter</span> - Falar no chat Twitter</li>
+            <li><span class="command-key">/policia</span> - Falar como Policial</li>
+            <li><span class="command-key">/medico</span> - Falar como Médico</li>
+            <li><span class="command-key">/local</span> - Falar com alguém próximo</li>
+          </ul>
+        </div>
+
+        <div class="detail-section">
+          <h3>Comandos de Chamados</h3>
+          <ul>
+            <li><span class="command-key">/chamar 192</span> - Chamar emergência (SAMU)</li>
+            <li><span class="command-key">/chamar 190</span> - Chamar polícia</li>
+            <li><span class="command-key">/chamar mec</span> - Chamar mecânico</li>
+            <li><span class="command-key">/chamar adm</span> - Chamar administrador</li>
+            <li><span class="command-key">/chamar restaurante</span> - Pedir comida</li>
           </ul>
         </div>
       </div>

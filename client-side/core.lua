@@ -44,26 +44,44 @@ AddEventHandler("Announce",function(Css,Message,Timer,Title)
 end)
 
 local infoHelp = true
-function openCloseShortCuts()
-    TriggerEvent("help:open")
-    infoHelp = not infoHelp
+
+-- Flag para evitar chamadas múltiplas em um curto período
+local isRestoringControls = false
+
+-- Função de fechamento de menu com proteção contra múltiplas chamadas
+function ForceCloseMenu()
+    if isRestoringControls then
+        return
+    end
     
-    -- Sempre envia um estado inicial limpo quando abre
-    if infoHelp then
-        -- Se estamos ativando o menu, enviar estado resetado
+    isRestoringControls = true
+    
+    -- Chamamos ForceRestoreControls que já contém a lógica necessária
+    ForceRestoreControls()
+    
+    -- Liberamos a flag após um intervalo
+    Citizen.SetTimeout(500, function()
+        isRestoringControls = false
+    end)
+end
+
+-- Modificar a função openCloseShortCuts para usar nossa nova função protegida
+function openCloseShortCuts()
+    if not infoHelp then
+        -- Abrir o menu
+        TriggerEvent("help:open")
+        infoHelp = true
+        
+        -- Enviar mensagem para a interface
         SendNUIMessage({ Action = "Tutorial", Status = true, Reset = true })
-        -- Forçar ativação do cursor explicitamente
+        
+        -- Ativar o cursor ao final
+        Citizen.Wait(100)
         SetNuiFocus(true, true)
         display = true
     else
-        -- Se estamos fechando, apenas fechar
-        SendNUIMessage({ Action = "Tutorial", Status = false })
-        -- Forçar desativação do cursor explicitamente
-        SetNuiFocus(false, false)
-        display = false
-        
-        -- Garantir que o controle seja restaurado
-        SetNuiFocusKeepInput(false)
+        -- Fechar o menu usando a função dedicada
+        ForceCloseMenu()
     end
 end
 
@@ -140,85 +158,32 @@ RegisterNUICallback("enableCursor", function(data, cb)
     if cb then cb('ok') end
 end)
 
+-- Simplificar callbacks - verificar se já está restaurando
 RegisterNUICallback("disableCursor", function(data, cb)
-    SetNuiFocus(false, false)
-    SetNuiFocusKeepInput(false)
-    display = false
-    
-    -- Log para debug
-    print("Cursor desativado com sucesso")
-    
-    if cb then cb('ok') end
-end)
-
--- Adicionar callback para fechar o menu
-RegisterNUICallback("closeMenu", function(data, cb)
-    -- Desativar o cursor
-    SetNuiFocus(false, false)
-    display = false
-    
-    -- Garantir que o controle seja restaurado
-    SetNuiFocusKeepInput(false)
-    
-    -- Atualizar o estado do menu
-    infoHelp = false
-    
-    -- Fechar o menu na UI
-    SendNUIMessage({ Action = "Tutorial", Status = false })
-    
-    -- Log para debug
-    print("Menu fechado e cursor desativado")
-    
-    if cb then cb('ok') end
-end)
-
--- Adicionar uma função para forçar a restauração do controle
-function ForceRestoreControls()
-    SetNuiFocus(false, false)
-    SetNuiFocusKeepInput(false)
-    display = false
-    infoHelp = false
-    
-    -- Enviar mensagem NUI para garantir que a UI feche
-    SendNUIMessage({ Action = "Tutorial", Status = false })
-    
-    -- Garantir que todas as teclas sejam habilitadas novamente
-    EnableAllControlActions(0)
-    EnableAllControlActions(1)
-    EnableAllControlActions(2)
-    
-    -- Log para debug
-    print("Controles forçadamente restaurados")
-end
-
--- Comando de emergência para restaurar controles
-RegisterCommand("restaurar_controles", function()
-    ForceRestoreControls()
-    TriggerEvent("Notify", "sucesso", "Controles restaurados com sucesso.", 3000)
-end, false)
-
--- Thread para verificar e restaurar controles em caso de problema
-CreateThread(function()
-    while true do
-        -- Se o menu estiver fechado mas o cursor ainda estiver ativo
-        if not infoHelp and display then
-            ForceRestoreControls()
-            print("Detectado inconsistência: Menu fechado mas cursor ativo. Corrigindo...")
-        end
-        
-        Wait(5000) -- Verificar a cada 5 segundos
+    if not isRestoringControls then
+        ForceCloseMenu()
     end
+    if cb then cb('ok') end
 end)
 
--- Registrar evento para o ESC do teclado (complemento ao handler no JavaScript)
+RegisterNUICallback("closeMenu", function(data, cb)
+    if not isRestoringControls then
+        ForceCloseMenu()
+    end
+    if cb then cb('ok') end
+end)
+
+RegisterNUICallback("ForceRestore", function(data, cb)
+    if not isRestoringControls then
+        ForceCloseMenu()
+    end
+    if cb then cb('ok') end
+end)
+
+-- Modificar o handler de ESC para verificar se já está restaurando
 RegisterCommand("+escapeKey", function()
-    if display or infoHelp then
-        infoHelp = false
-        display = false
-        SendNUIMessage({ Action = "Tutorial", Status = false })
-        SetNuiFocus(false, false)
-        SetNuiFocusKeepInput(false)
-        print("Restaurando controles via tecla ESC")
+    if (display or infoHelp) and not isRestoringControls then
+        ForceCloseMenu()
     end
 end, false)
 
@@ -248,3 +213,28 @@ AddEventHandler('onClientMapStart', function()
     ForceRestoreControls()
     print("Mapa iniciado: Restaurando controles")
 end)
+
+-- Primeiro definimos a função ForceRestoreControls que está sendo chamada mas não existe
+function ForceRestoreControls()
+    -- 1. Primeira desabilitar o foco da NUI
+    SetNuiFocus(false, false)
+    SetNuiFocusKeepInput(false)
+    
+    -- 2. Atualizar variáveis de estado
+    display = false
+    infoHelp = false
+    
+    -- 3. Habilitar todos os controles
+    EnableAllControlActions(0)
+    EnableAllControlActions(1)
+    EnableAllControlActions(2)
+    
+    -- 4. Forçar atualização da UI
+    DisplayRadar(false)
+    DisplayRadar(true)
+    
+    -- 5. Fechar o menu na UI
+    SendNUIMessage({ Action = "Tutorial", Status = false })
+    
+    print("Controles restaurados")
+end

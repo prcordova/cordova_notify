@@ -318,17 +318,44 @@ $(() => {
         $("#help-menu").fadeOut(500);
         // Desabilitar cursor quando o menu é fechado - múltiplas tentativas para garantir
         $.post("https://cordova_notify/disableCursor", JSON.stringify({}));
+        $.post("https://cordova_notify/closeMenu", JSON.stringify({}));
         // Tentar novamente após um breve delay para garantir
         setTimeout(function () {
           $.post("https://cordova_notify/disableCursor", JSON.stringify({}));
+          $.post("https://cordova_notify/closeMenu", JSON.stringify({}));
         }, 100);
         setTimeout(function () {
           $.post("https://cordova_notify/disableCursor", JSON.stringify({}));
+          $.post("https://cordova_notify/closeMenu", JSON.stringify({}));
+          $.post("https://cordova_notify/ForceRestore", JSON.stringify({}));
         }, 300);
         break;
     }
   });
 });
+
+// Variável para rastrear se uma chamada de fechamento está em andamento
+let closingInProgress = false;
+
+// Função compartilhada para fechar o menu
+function closeHelpMenu() {
+  if (closingInProgress) return;
+
+  closingInProgress = true;
+
+  // Esconder a UI
+  $("#help-menu").fadeOut(300);
+
+  // Uma única chamada após a animação iniciar
+  setTimeout(function () {
+    $.post("https://cordova_notify/closeMenu", JSON.stringify({}));
+
+    // Redefinir o sinalizador após um período
+    setTimeout(function () {
+      closingInProgress = false;
+    }, 1000);
+  }, 200);
+}
 
 // Inicialização do Menu de Ajuda
 function initializeHelpMenu() {
@@ -475,15 +502,7 @@ function initializeHelpMenu() {
 
   // Evento para fechar o menu com o botão de fechar
   $("#help-menu-close").on("click", function () {
-    $("#help-menu").fadeOut(500);
-    // Desabilitar cursor quando o menu é fechado - múltiplas tentativas
-    $.post("https://cordova_notify/disableCursor", JSON.stringify({}));
-    // Informar ao backend que o menu foi fechado
-    $.post("https://cordova_notify/closeMenu", JSON.stringify({}));
-    // Tentar novamente após um breve delay para garantir
-    setTimeout(function () {
-      $.post("https://cordova_notify/disableCursor", JSON.stringify({}));
-    }, 100);
+    closeHelpMenu();
   });
 
   // Evento para cards principais - navegar para tela específica
@@ -519,17 +538,8 @@ function initializeHelpMenu() {
   document.addEventListener("keydown", function (e) {
     if (e.key === "=" || e.code === "Equal") {
       const helpMenu = $("#help-menu");
-
       if (helpMenu.is(":visible")) {
-        helpMenu.fadeOut(500);
-        // Desabilitar cursor - múltiplas chamadas para garantir
-        $.post("https://cordova_notify/disableCursor", JSON.stringify({}));
-        // Informar ao backend que o menu foi fechado
-        $.post("https://cordova_notify/closeMenu", JSON.stringify({}));
-        // Tentar novamente após um breve delay
-        setTimeout(function () {
-          $.post("https://cordova_notify/disableCursor", JSON.stringify({}));
-        }, 100);
+        closeHelpMenu();
       } else {
         helpMenu.fadeIn(500);
         // Resetar para a tela principal
@@ -541,28 +551,32 @@ function initializeHelpMenu() {
 
     // Adicionar escape para fechar o menu
     if (e.key === "Escape" || e.code === "Escape") {
-      const helpMenu = $("#help-menu");
-      if (helpMenu.is(":visible")) {
-        helpMenu.fadeOut(500);
+      if ($("#help-menu").is(":visible")) {
+        closeHelpMenu();
+      }
+    }
+
+    // Tecla Backspace para voltar à tela anterior ou fechar o menu se estiver na tela principal
+    if (
+      (e.key === "Backspace" || e.code === "Backspace") &&
+      $("#help-menu").is(":visible")
+    ) {
+      // Verificar se estamos na tela principal
+      if ($("#main-screen").is(":visible")) {
+        // Fechar o menu se estiver na tela principal
+        $("#help-menu").fadeOut(500);
         // Desabilitar cursor - múltiplas chamadas para garantir
         $.post("https://cordova_notify/disableCursor", JSON.stringify({}));
-        // Enviar evento para o Lua para garantir sincronização
+        // Informar ao backend que o menu foi fechado
         $.post("https://cordova_notify/closeMenu", JSON.stringify({}));
         // Tentar novamente após um breve delay
         setTimeout(function () {
           $.post("https://cordova_notify/disableCursor", JSON.stringify({}));
         }, 100);
-      }
-    }
-
-    // Tecla Backspace para voltar à tela anterior
-    if (
-      (e.key === "Backspace" || e.code === "Backspace") &&
-      $("#help-menu").is(":visible")
-    ) {
-      // Verificar se não estamos na tela principal
-      if ($("#main-screen").is(":visible") === false) {
-        // Encontrar o botão de voltar na tela atual e simular clique
+        // Prevenir o comportamento padrão do backspace
+        e.preventDefault();
+      } else {
+        // Se não estiver na tela principal, voltamos à tela anterior
         const visibleScreen = $(".screen:visible");
         const backButton = visibleScreen.find(".back-button");
         if (backButton.length > 0) {
